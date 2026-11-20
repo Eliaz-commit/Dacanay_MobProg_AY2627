@@ -31,6 +31,7 @@ class NewsFeedCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Profile and username
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -75,13 +76,19 @@ class NewsFeedCard extends StatelessWidget {
                 Icon(Icons.more_horiz),
               ],
             ),
+
             SizedBox(height: ScreenUtil().setHeight(5)),
+
+            // Post content
             CustomText(
               text: postContent,
               fontSize: ScreenUtil().setSp(12),
               color: Colors.black,
             ),
+
             SizedBox(height: ScreenUtil().setHeight(5)),
+
+            // Optional post image
             if (imageUrl != null) ...[
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.r),
@@ -92,7 +99,10 @@ class NewsFeedCard extends StatelessWidget {
                     fit: BoxFit.cover,
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) return child;
-                      return const Center(child: CircularProgressIndicator());
+
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
                     },
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
@@ -110,6 +120,8 @@ class NewsFeedCard extends StatelessWidget {
               ),
               SizedBox(height: ScreenUtil().setHeight(5)),
             ],
+
+            // Like, Comment, and Share buttons
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -132,21 +144,10 @@ class NewsFeedCard extends StatelessWidget {
                 ),
               ],
             ),
+
+            // Comment field without profile avatar
             Row(
               children: [
-                CircleAvatar(
-                  radius: 14.r,
-                  backgroundColor: Colors.grey[200],
-                  foregroundImage: avatarUrl == null
-                      ? null
-                      : NetworkImage(avatarUrl!),
-                  child: Icon(
-                    Icons.person,
-                    color: Colors.grey[700],
-                    size: 18.sp,
-                  ),
-                ),
-                SizedBox(width: ScreenUtil().setWidth(10)),
                 Expanded(
                   child: Container(
                     padding: EdgeInsets.symmetric(
@@ -169,7 +170,10 @@ class NewsFeedCard extends StatelessWidget {
                 ),
               ],
             ),
+
             SizedBox(height: ScreenUtil().setHeight(10)),
+
+            // View comments
             CustomText(
               text: 'View comments',
               fontSize: ScreenUtil().setSp(12),
