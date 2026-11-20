@@ -35,14 +35,7 @@ class NewsFeedCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  radius: 20.r,
-                  backgroundColor: Colors.grey[200],
-                  foregroundImage: avatarUrl == null
-                      ? null
-                      : NetworkImage(avatarUrl!),
-                  child: Icon(Icons.person, color: Colors.grey[700]),
-                ),
+                _avatar(20.r, 15.sp),
                 SizedBox(width: ScreenUtil().setWidth(10)),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,24 +116,29 @@ class NewsFeedCard extends StatelessWidget {
 
             // Like, Comment, and Share buttons
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                PostActionButton(
-                  onPressed: () {
-                    debugPrint('Liked');
-                  },
-                  icon: Icons.thumb_up,
-                  label: numOfLikes.toString(),
+                Expanded(
+                  child: PostActionButton(
+                    onPressed: () {
+                      debugPrint('Liked');
+                    },
+                    icon: Icons.thumb_up,
+                    label: numOfLikes.toString(),
+                  ),
                 ),
-                PostActionButton(
-                  onPressed: () {},
-                  icon: Icons.comment,
-                  label: 'Comment',
+                Expanded(
+                  child: PostActionButton(
+                    onPressed: () {},
+                    icon: Icons.comment,
+                    label: 'Comment',
+                  ),
                 ),
-                PostActionButton(
-                  onPressed: () {},
-                  icon: Icons.redo,
-                  label: 'Share',
+                Expanded(
+                  child: PostActionButton(
+                    onPressed: () {},
+                    icon: Icons.redo,
+                    label: 'Share',
+                  ),
                 ),
               ],
             ),
@@ -181,6 +179,25 @@ class NewsFeedCard extends StatelessWidget {
               color: Colors.black,
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _avatar(double radius, double fontSize) {
+    final initial = userName.trim().isEmpty
+        ? '?'
+        : userName.trim()[0].toUpperCase();
+    return CircleAvatar(
+      radius: radius,
+      backgroundColor: Colors.blue[50],
+      foregroundImage: avatarUrl == null ? null : NetworkImage(avatarUrl!),
+      child: Text(
+        initial,
+        style: TextStyle(
+          color: Colors.blue[800],
+          fontSize: fontSize,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );

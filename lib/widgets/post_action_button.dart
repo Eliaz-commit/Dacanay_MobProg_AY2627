@@ -18,10 +18,28 @@ class PostActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton.icon(
+    return TextButton(
       onPressed: onPressed,
-      icon: Icon(icon, color: FB_DARK_PRIMARY, size: 20.sp),
-      label: CustomText(text: label, fontSize: 12.sp, color: FB_DARK_PRIMARY),
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.symmetric(horizontal: 2.w),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: FB_DARK_PRIMARY, size: 20.sp),
+          SizedBox(width: 4.w),
+          Flexible(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: CustomText(
+                text: label,
+                fontSize: 12.sp,
+                color: FB_DARK_PRIMARY,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
