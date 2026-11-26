@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../constants.dart';
 import 'custom_text.dart';
 import 'post_action_button.dart';
 
@@ -97,15 +98,11 @@ class NewsFeedCard extends StatelessWidget {
                         child: CircularProgressIndicator(),
                       );
                     },
+                    // If the photo cannot load, show Flutter's Placeholder box.
                     errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey[200],
-                        alignment: Alignment.center,
-                        child: Icon(
-                          Icons.image_not_supported_outlined,
-                          color: Colors.grey[600],
-                          size: 48.sp,
-                        ),
+                      return const Placeholder(
+                        color: FB_SECONDARY,
+                        strokeWidth: 1.5,
                       );
                     },
                   ),
@@ -190,12 +187,12 @@ class NewsFeedCard extends StatelessWidget {
         : userName.trim()[0].toUpperCase();
     return CircleAvatar(
       radius: radius,
-      backgroundColor: Colors.blue[50],
+      backgroundColor: FB_LIGHT_PRIMARY,
       foregroundImage: avatarUrl == null ? null : NetworkImage(avatarUrl!),
       child: Text(
         initial,
         style: TextStyle(
-          color: Colors.blue[800],
+          color: FB_DARK_PRIMARY,
           fontSize: fontSize,
           fontWeight: FontWeight.bold,
         ),
